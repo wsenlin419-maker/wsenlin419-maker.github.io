@@ -95,9 +95,80 @@
             </div>
 
             <!-- PROJECTS -->
-            <div id="tab-Projects" class="tab-content animate-fadeIn text-center py-20">
-                <h2 class="text-3xl text-gray-600 italic">Project gallery coming soon...</h2>
-                <p class="mt-4 text-gray-500 text-lg">Detailed ethnographic case studies and linguistic maps will be published here.</p>
+             <div id="tab-Projects" class="tab-content animate-fadeIn">
+                <h2 class="text-4xl font-bold text-gray-900 mb-2">Research Projects</h2>
+                <div class="w-full h-px bg-gray-300 mb-12"></div>
+
+                <!-- 垂直分布的容器，方便后续无限添加 Project 2, Project 3... -->
+                <div class="space-y-16">
+                    
+                    <!-- Project 1 -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 overflow-hidden flex flex-col">
+                        
+                        <!-- 海报展示区 (画廊级全宽排版 + 弥散背景) -->
+                        <div class="relative w-full overflow-hidden bg-[#2a2d27] flex items-center justify-center min-h-[400px]">
+                            <!-- 弥散光影背景 (动态读取原图并虚化，完美解决两边空的问题) -->
+                            <div class="absolute inset-0 z-0">
+                                <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/%E5%AD%A6%E6%9C%AF%E6%B5%B7%E6%8A%A5.png" class="w-full h-full object-cover blur-3xl opacity-40 transform scale-110" alt="">
+                            </div>
+                            
+                            <!-- 实际海报主体 -->
+                            <div class="relative z-10 w-full py-12 px-4 md:px-12 flex justify-center">
+                                <img 
+                                    src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/%E5%AD%A6%E6%9C%AF%E6%B5%B7%E6%8A%A5.png" 
+                                    alt="Academic Poster - Faces vs. Steel" 
+                                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588600878108-578307a3cc9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';"
+                                    class="max-h-[600px] w-auto object-contain shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] cursor-pointer"
+                                    onclick="window.open(this.src, '_blank')"
+                                    title="Click to view full poster"
+                                >
+                            </div>
+                            
+                            <!-- 悬浮提示放大图标 -->
+                            <div class="absolute bottom-6 right-6 bg-white/20 backdrop-blur-md p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg z-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- 文本描述区 -->
+                        <div class="p-8 md:p-12 flex flex-col bg-white relative z-20">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-sm text-[#a47b73] font-semibold tracking-widest uppercase">Political Communication & Visual Politics</div>
+                                <span class="text-xs font-bold text-gray-300 uppercase tracking-widest">Project 01</span>
+                            </div>
+                            
+                            <h3 class="text-3xl font-bold text-gray-900 mb-6 transition-colors duration-300 group-hover:text-[#a47b73]">
+                                Faces vs. Steel: A Comparative Visual Framing Analysis of China's Aid in Africa
+                            </h3>
+                            
+                            <p class="text-gray-600 mb-8 leading-relaxed text-lg flex-grow">
+                                This independent research project explores the polarized visual narratives of China's aid in Africa. By conducting a mixed-methods visual framing analysis on 250+ images from Western and Chinese media, the study reveals a stark contrast: Western media is dominated by "Pure Objects," depicting a dehumanized "Technocratic Presence" (Steel), while Chinese media significantly emphasizes "Human Warmth" (Faces) to construct a softer national image.
+                            </p>
+                            
+                            <!-- 指导教授信息 -->
+                            <div class="pt-6 border-t border-gray-100">
+                                <p class="text-base text-gray-600 italic flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#a47b73]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6L3 9m9 5l9-5" />
+                                    </svg>
+                                    <span class="font-semibold text-gray-800 not-italic mr-2">Advised by:</span> Prof. Maria Repnikova (Georgia State University)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 (未来项目的占位符) -->
+                    <div class="flex flex-col items-center justify-center py-16 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <p class="text-gray-400 italic text-lg tracking-wide">More projects coming soon...</p>
+                    </div>
+
+                </div>
             </div>
 
             <!-- CONFERENCES -->
