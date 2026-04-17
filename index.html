@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senlin Wang - Academic Profile</title>
-    <!-- 引入 Tailwind CSS 以应用样式 -->
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入网站访客统计接口 (Busuanzi) -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
     <style>
         /* 页面切换的淡入动画 */
         @keyframes fadeIn {
@@ -22,6 +25,17 @@
         }
         .tab-content.active {
             display: block;
+        }
+
+        /* 会议胸牌专属样式 */
+        .conference-badge {
+            transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        /* 解下挂牌的掉落动画 */
+        .unclipped {
+            transform: translateY(200px) rotate(15deg) scale(0.8) !important;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -77,7 +91,68 @@
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
                     Hello, 你好, 歡迎
                 </h2>
-                
+
+                <!-- 互动：学术会议访客 Badge (通行胸牌) -->
+                    <div id="visitor-badge" 
+                         class="conference-badge mt-10 md:mt-0 md:absolute md:-top-4 md:right-0 w-56 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-lg border border-gray-200 flex flex-col relative z-10 cursor-pointer transform rotate-2 hover:rotate-0 hover:-translate-y-1 transition-all duration-300" 
+                         onclick="tearOffBadge()" 
+                         title="Click to unclip badge">
+                        
+                        <!-- 顶部的拟物化挂孔与夹子 -->
+                        <div class="w-full flex justify-center pt-3 pb-2 bg-gradient-to-b from-gray-50 to-white rounded-t-lg relative">
+                            <!-- 扁平的挂孔 -->
+                            <div class="w-12 h-2.5 bg-[#fdfdfb] rounded-full border border-gray-300 shadow-inner absolute top-2.5 z-0"></div>
+                            <!-- 金属夹子 -->
+                            <div class="w-3 h-8 bg-gradient-to-b from-gray-300 to-gray-400 absolute -top-4 rounded-sm shadow-md border border-gray-400 z-10"></div>
+                        </div>
+
+                        <!-- 证件头部 Header -->
+                        <div class="bg-[#4a5043] w-full py-2 flex justify-center items-center">
+                            <span class="text-white text-xs font-sans font-bold tracking-[0.25em]">VISITOR PASS</span>
+                        </div>
+
+                        <!-- 证件主体内容 -->
+                        <div class="px-5 py-5 flex flex-col items-center text-center">
+                            <p class="text-[#a47b73] font-serif italic text-sm mb-1">Admitted to</p>
+                            <h3 class="text-[17px] font-bold text-gray-900 leading-snug font-serif uppercase tracking-wide">
+                                Senlin Wang's<br>Academic Archive
+                            </h3>
+                            
+                            <!-- 分割线 -->
+                            <div class="w-full border-t border-dashed border-gray-300 my-4"></div>
+                            
+                            <!-- 访客统计 -->
+                            <p class="text-[10px] text-gray-500 font-sans tracking-widest uppercase mb-1">Attendee Number</p>
+                            <p class="text-3xl font-mono font-bold text-gray-800 tracking-tight">
+                                No.<span id="busuanzi_value_site_pv">...</span>
+                            </p>
+                            
+                            <p class="text-[10px] text-gray-500 font-sans font-bold mt-4 tracking-widest bg-gray-100 px-3 py-1 rounded">ACCESS: ALL AREAS</p>
+                            
+                            <!-- 底部装饰条形码 -->
+                            <div class="w-full h-8 mt-4 flex items-center justify-between px-1 opacity-60">
+                                <div class="w-1.5 h-full bg-gray-800"></div>
+                                <div class="w-3 h-full bg-gray-800"></div>
+                                <div class="w-1 h-full bg-gray-800"></div>
+                                <div class="w-[2px] h-full bg-gray-800"></div>
+                                <div class="w-2 h-full bg-gray-800"></div>
+                                <div class="w-1 h-full bg-gray-800"></div>
+                                <div class="w-4 h-full bg-gray-800"></div>
+                                <div class="w-0.5 h-full bg-gray-800"></div>
+                                <div class="w-2 h-full bg-gray-800"></div>
+                                <div class="w-1 h-full bg-gray-800"></div>
+                                <div class="w-2.5 h-full bg-gray-800"></div>
+                            </div>
+                        </div>
+
+                        <!-- 隐藏的解下提示 -->
+                        <div class="absolute -right-4 -bottom-4 bg-gray-900/80 text-white text-[10px] font-sans px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            Click to unclip
+                        </div>
+                    </div>
+
+                </div>
+            
                 <div class="text-gray-700 leading-relaxed text-lg space-y-6">
                     <p>
                         Welcome to my personal website!
@@ -177,152 +252,216 @@
                 <div class="w-full h-px bg-gray-300 mb-12"></div>
 
                 <div class="space-y-16">
-                    <!-- Conference 1 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">Al Ain, UAE</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Feb 20th-22th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
+                    
+                    <!-- Conference 1: UAEU -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/91/United_Arab_Emirates_University_logo.svg/500px-United_Arab_Emirates_University_logo.svg.png" 
+                                     onerror="this.onerror=null; this.src='https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.uaeu.ac.ae/&size=256';" 
+                                     alt="UAEU Logo" class="w-full h-full object-contain">
+                            </div>
                         </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            The 2nd MOR International Conference and PDW
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    The "Invisible Drivers" of Carbon Governance: A Study on the Network Mobilization and Policy Advocacy Strategies of Non-Governmental Organizations (NGOs)
-                                </p>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Al Ain, UAE</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Feb 20th-22th 2026</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Oral Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                The 2nd MOR International Conference and PDW
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        The "Invisible Drivers" of Carbon Governance: A Study on the Network Mobilization and Policy Advocacy Strategies of Non-Governmental Organizations (NGOs)
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Conference 2 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">The University of Tokyo, Japan</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Mar 18th-20th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
+                    <!-- Conference 2: UTokyo -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/University_of_Tokyo_logo.svg/500px-University_of_Tokyo_logo.svg.png" 
+                                     onerror="this.onerror=null; this.src='https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.u-tokyo.ac.jp/&size=256';" 
+                                     alt="UTokyo Logo" class="w-full h-full object-contain">
+                            </div>
                         </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            2026 International Conference on Human Rights: Youth in Asia
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    Survival on the Margins: Linguistic Hybridity and Youth Identity Negotiation in the East Asian Borderland
-                                </p>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">The University of Tokyo, Japan</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Mar 18th-20th 2026</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Oral Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                2026 International Conference on Human Rights: Youth in Asia
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        Survival on the Margins: Linguistic Hybridity and Youth Identity Negotiation in the East Asian Borderland
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Conference 3 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">University of Illinois Urbana-Champaign, USA</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Apr 4th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
-                        </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            The 7th Annual Sociolinguistics Symposium (SOSY 7)
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
-                                </p>
+                    <!-- Conference 3: UIUC -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/University_of_Illinois_at_Urbana%E2%80%93Champaign_logo.svg/500px-University_of_Illinois_at_Urbana%E2%80%93Champaign_logo.svg.png" 
+                                     onerror="this.onerror=null; this.src='https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://illinois.edu/&size=256';" 
+                                     alt="UIUC Logo" class="w-full h-full object-contain">
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Conference 4 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">Emory University, USA</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Apr 17th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
-                        </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            The 7th Annual Emory Undergraduate Linguistics Conference (EULC 7)
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    A Sociolinguistic Analysis of Linguistic Hybridity and Identity in Nanjiang
-                                </p>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-[11px] sm:text-sm md:text-lg">University of Illinois Urbana-Champaign, USA</span>
+                                <span class="italic text-gray-800 text-[11px] sm:text-sm md:text-lg">Apr 4th 2026</span>
+                                <span class="italic text-gray-800 text-[11px] sm:text-sm md:text-lg">Oral Presenter</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Conference 5 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">Purdue University, USA</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Apr 24th-25th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Poster Presenter</span>
-                        </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            Purdue Linguistics Symposium 2026 (PLS 2026)
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
-                                </p>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                The 7th Annual Sociolinguistics Symposium (SOSY 7)
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Conference 6 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">The Education University of Hong Kong, China</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Jun 12th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
-                        </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            The 10th Undergraduate Academic Conference in Humanities (UAC)
-                        </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    <span>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
                                         Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
-                                        <span class="block text-base text-[#a8b0a1] mt-1 tracking-widest font-light">邊緣的生存：南江方言的混合性與區域認同</span>
-                                    </span>
-                                </p>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Conference 7 -->
-                    <div class="flex flex-col items-center">
-                        <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap">
-                            <span class="font-bold text-gray-900 text-sm md:text-lg">Sapienza University of Rome, Italy</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Jun 17th-18th 2026</span>
-                            <span class="italic text-gray-800 text-sm md:text-lg">Oral Presenter</span>
+                    <!-- Conference 4: Emory -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://en.wikipedia.org/w/thumb.php?f=Emory_University_Seal.svg&w=500" 
+                                     onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Emory_University_logo.svg/500px-Emory_University_logo.svg.png';" 
+                                     alt="Emory Logo" class="w-full h-full object-contain">
+                            </div>
                         </div>
-                        <div class="text-center text-gray-800 text-lg mb-4">
-                            AILC 9th - 2026 Study Days on Chinese Linguistics (Italian Association of Chinese Linguistics)
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Emory University, USA</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Apr 17th 2026</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Oral Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                The 7th Annual Emory Undergraduate Linguistics Conference (EULC 7)
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        A Sociolinguistic Analysis of Linguistic Hybridity and Identity in Nanjiang
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="w-full flex justify-center">
-                            <div class="w-11/12 md:w-3/4 relative flex items-center">
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
-                                <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
-                                    Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
-                                </p>
+                    </div>
+
+                    <!-- Conference 5: Purdue -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/500px-Purdue_Boilermakers_logo.svg.png" 
+                                     onerror="this.onerror=null; this.src='https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.purdue.edu/&size=256';" 
+                                     alt="Purdue Logo" class="w-full h-full object-contain">
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Purdue University, USA</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Apr 24th-25th 2026</span>
+                                <span class="italic text-gray-800 text-xs sm:text-sm md:text-lg">Poster Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                Purdue Linguistics Symposium 2026 (PLS 2026)
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conference 6: EdUHK -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/42/EdUHK_logo.svg/500px-EdUHK_logo.svg.png" 
+                                     onerror="this.onerror=null; this.src='https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.eduhk.hk/&size=256';" 
+                                     alt="EdUHK Logo" class="w-full h-full object-contain">
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-[10px] sm:text-sm md:text-lg">The Education University of Hong Kong, China</span>
+                                <span class="italic text-gray-800 text-[10px] sm:text-sm md:text-lg">Jun 12th 2026</span>
+                                <span class="italic text-gray-800 text-[10px] sm:text-sm md:text-lg">Oral Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                The 10th Undergraduate Academic Conference in Humanities (UAC)
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        <span>
+                                            Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
+                                            <span class="block text-base text-[#a8b0a1] mt-1 tracking-widest font-light">邊緣的生存：南江方言的混合性與區域認同</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conference 7: Sapienza -->
+                    <div class="group flex flex-col items-center max-w-4xl mx-auto">
+                        <div class="mb-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center p-2 bg-white rounded-full shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
+                                <img src="https://commons.wikimedia.org/w/thumb.php?f=Sapienza_Universit%C3%A0_di_Roma_logo.svg&w=500" 
+                                     onerror="this.onerror=null; this.src='https://www.uniroma1.it/sites/default/files/images/logo/sapienza-big.png';" 
+                                     alt="Sapienza Logo" class="w-full h-full object-contain">
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="flex flex-nowrap justify-center items-baseline gap-x-2 md:gap-x-4 mb-2 w-full whitespace-nowrap overflow-hidden">
+                                <span class="font-bold text-gray-900 text-[11px] sm:text-sm md:text-lg">Sapienza University of Rome, Italy</span>
+                                <span class="italic text-gray-800 text-[11px] sm:text-sm md:text-lg">Jun 17th-18th 2026</span>
+                                <span class="italic text-gray-800 text-[11px] sm:text-sm md:text-lg">Oral Presenter</span>
+                            </div>
+                            <div class="text-center text-gray-800 text-lg mb-4 w-full">
+                                AILC 9th - 2026 Study Days on Chinese Linguistics (Italian Assoc. of Chinese Linguistics)
+                            </div>
+                            <div class="w-full relative flex justify-center">
+                                <div class="w-11/12 md:w-3/4 relative flex items-center">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
+                                    <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
+                                        Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-
+    
             <!-- RESUME / C.V. -->
             <div id="tab-Resume" class="tab-content animate-fadeIn">
                 <h2 class="text-4xl font-bold text-gray-900 mb-2">Curriculum Vitae</h2>
@@ -461,17 +600,15 @@
         <p>© <script>document.write(new Date().getFullYear())</script> Senlin Wang. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript：处理标签页切换 -->
+    <!-- JavaScript：处理标签页切换 与 会议胸牌解下交互 -->
     <script>
         const tabs = ['Home', 'Projects', 'Conferences', 'Resume', 'Contact'];
 
         function switchTab(activeTabId) {
-            // 隐藏所有区块并重置按钮样式
             tabs.forEach(tab => {
                 const section = document.getElementById('tab-' + tab);
                 if (section) {
                     section.classList.remove('active');
-                    // 移除动画 class 以便重新触发
                     section.classList.remove('animate-fadeIn');
                 }
                 
@@ -481,19 +618,28 @@
                 }
             });
 
-            // 显示选中的区块
             const activeSection = document.getElementById('tab-' + activeTabId);
             if (activeSection) {
                 activeSection.classList.add('active');
-                // 强制重绘，使动画生效
                 void activeSection.offsetWidth; 
                 activeSection.classList.add('animate-fadeIn');
             }
 
-            // 更新选中的按钮样式
             const activeBtn = document.getElementById('nav-' + activeTabId);
             if (activeBtn) {
                 activeBtn.className = 'text-base md:text-lg tracking-wide transition-colors duration-300 text-[#a47b73] border-b-2 border-[#a47b73] pb-1';
+            }
+        }
+
+        // 会议胸牌“解下”特效函数
+        function tearOffBadge() {
+            const badge = document.getElementById('visitor-badge');
+            if (badge) {
+                badge.classList.add('unclipped');
+                // 动画结束后隐藏元素，防止遮挡下方内容点击
+                setTimeout(() => {
+                    badge.style.display = 'none';
+                }, 700); 
             }
         }
     </script>
