@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入网站访客统计接口 (Busuanzi) -->
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!-- 引入超美的手写字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* 页面切换的淡入动画 */
@@ -24,6 +26,11 @@
         }
         .tab-content.active {
             display: block;
+        }
+
+        /* 艺术手写体 */
+        .handwriting {
+            font-family: 'Caveat', cursive;
         }
 
         /* 会议胸牌专属样式 */
@@ -99,30 +106,23 @@
                          onclick="tearOffBadge()" 
                          title="Click to unclip badge">
                         
-                        <!-- 顶部的拟物化挂孔与夹子 -->
                         <div class="w-full flex justify-center pt-3 pb-2 bg-gradient-to-b from-gray-50 to-white rounded-t-lg relative">
-                            <!-- 扁平的挂孔 -->
                             <div class="w-12 h-2.5 bg-[#fdfdfb] rounded-full border border-gray-300 shadow-inner absolute top-2.5 z-0"></div>
-                            <!-- 金属夹子 -->
                             <div class="w-3 h-8 bg-gradient-to-b from-gray-300 to-gray-400 absolute -top-4 rounded-sm shadow-md border border-gray-400 z-10"></div>
                         </div>
 
-                        <!-- 证件头部 Header -->
                         <div class="bg-[#4a5043] w-full py-2 flex justify-center items-center">
                             <span class="text-white text-xs font-sans font-bold tracking-[0.25em]">VISITOR PASS</span>
                         </div>
 
-                        <!-- 证件主体内容 -->
                         <div class="px-5 py-5 flex flex-col items-center text-center">
                             <p class="text-[#a47b73] font-serif italic text-sm mb-1">Admitted to</p>
                             <h3 class="text-[17px] font-bold text-gray-900 leading-snug font-serif uppercase tracking-wide">
                                 Senlin Wang's<br>Academic Archive
                             </h3>
                             
-                            <!-- 分割线 -->
                             <div class="w-full border-t border-dashed border-gray-300 my-4"></div>
                             
-                            <!-- 访客统计 -->
                             <p class="text-[10px] text-gray-500 font-sans tracking-widest uppercase mb-1">Attendee Number</p>
                             <p class="text-3xl font-mono font-bold text-gray-800 tracking-tight">
                                 No.<span id="busuanzi_value_site_pv">...</span>
@@ -130,7 +130,6 @@
                             
                             <p class="text-[10px] text-gray-500 font-sans font-bold mt-4 tracking-widest bg-gray-100 px-3 py-1 rounded">ACCESS: ALL AREAS</p>
                             
-                            <!-- 底部装饰条形码 -->
                             <div class="w-full h-8 mt-4 flex items-center justify-between px-1 opacity-60">
                                 <div class="w-1.5 h-full bg-gray-800"></div>
                                 <div class="w-3 h-full bg-gray-800"></div>
@@ -146,7 +145,6 @@
                             </div>
                         </div>
 
-                        <!-- 隐藏的解下提示 -->
                         <div class="absolute -right-4 -bottom-4 bg-gray-900/80 text-white text-[10px] font-sans px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                             Click to unclip
                         </div>
@@ -242,7 +240,7 @@
                 <h2 class="text-4xl font-bold text-gray-900 mb-2">Conferences</h2>
                 <div class="w-full h-px bg-gray-300 mb-12"></div>
 
-                <div class="space-y-16">
+                <div class="space-y-24">
                     
                     <!-- Conference 1: UAEU -->
                     <div class="group flex flex-col items-center max-w-4xl mx-auto">
@@ -262,12 +260,42 @@
                             <div class="text-center text-gray-800 text-lg mb-4 w-full">
                                 The 2nd MOR International Conference and PDW
                             </div>
-                            <div class="w-full relative flex justify-center">
+                            <div class="w-full relative flex justify-center mb-10">
                                 <div class="w-11/12 md:w-3/4 relative flex items-center">
                                     <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
                                     <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
                                         The "Invisible Drivers" of Carbon Governance: A Study on the Network Mobilization and Policy Advocacy Strategies of Non-Governmental Organizations (NGOs)
                                     </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 艺术拼贴画廊：MOR (2张) -->
+                            <div class="w-full flex flex-wrap justify-center gap-10 px-2 mt-4">
+                                <!-- 拍立得 1 -->
+                                <div class="relative group/photo transform rotate-[-2deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/MOR.jpg', '_blank')">
+                                    <!-- 胶带 -->
+                                    <div class="absolute -top-3 right-1/4 w-12 h-4 bg-green-200/80 shadow-sm rotate-[3deg] z-10 mix-blend-multiply"></div>
+                                    <!-- 相框 -->
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/MOR.jpg" alt="MOR Photo 1" class="w-60 h-48 object-cover group-hover/photo:scale-105 transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Editorial Exchange
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 拍立得 2 -->
+                                <div class="relative group/photo transform rotate-[3deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer mt-4 md:mt-0" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/MOR%202.jpg', '_blank')">
+                                    <div class="absolute -top-3 left-1/4 w-14 h-4 bg-pink-200/80 shadow-sm rotate-[-4deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/MOR%202.jpg" alt="MOR Photo 2" class="w-60 h-48 object-cover group-hover/photo:scale-105 transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Certificate of Attendance
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,12 +319,41 @@
                             <div class="text-center text-gray-800 text-lg mb-4 w-full">
                                 2026 International Conference on Human Rights: Youth in Asia
                             </div>
-                            <div class="w-full relative flex justify-center">
+                            <div class="w-full relative flex justify-center mb-10">
                                 <div class="w-11/12 md:w-3/4 relative flex items-center">
                                     <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
                                     <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
                                         Survival on the Margins: Linguistic Hybridity and Youth Identity Negotiation in the East Asian Borderland
                                     </p>
+                                </div>
+                            </div>
+
+                            <!-- 艺术拼贴画廊：ICHR (2张：Visual海报 + 现场照) -->
+                            <div class="w-full flex flex-wrap justify-center items-end gap-10 px-2 mt-4">
+                                <!-- 拍立得 1 (海报加长款) -->
+                                <div class="relative group/photo transform rotate-[-3deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/ICHR%202026%20Visual.png', '_blank')">
+                                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-14 h-4 bg-yellow-200/80 shadow-sm rotate-[2deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-[#fdfdfb] flex items-center justify-center">
+                                            <!-- 使用 object-contain 保护海报完整比例 -->
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/ICHR%202026%20Visual.png" alt="ICHR Visual" class="w-56 h-72 object-contain group-hover/photo:scale-[1.03] transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Conference Poster
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 拍立得 2 (横向实拍) -->
+                                <div class="relative group/photo transform rotate-[2deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer mt-4 md:mt-0" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/ICHR.jpg', '_blank')">
+                                    <div class="absolute -top-2 left-1/3 w-12 h-4 bg-pink-300/60 shadow-sm rotate-[-4deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/ICHR.jpg" alt="ICHR Photo" class="w-60 h-48 object-cover group-hover/photo:scale-105 transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Group Photo
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -320,12 +377,40 @@
                             <div class="text-center text-gray-800 text-lg mb-4 w-full">
                                 The 7th Annual Sociolinguistics Symposium (SOSY 7)
                             </div>
-                            <div class="w-full relative flex justify-center">
+                            <div class="w-full relative flex justify-center mb-10">
                                 <div class="w-11/12 md:w-3/4 relative flex items-center">
                                     <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
                                     <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
                                         Survival on the Margins: Linguistic Hybridity and Regional Identity in Nanjiang
                                     </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 艺术拼贴画廊：SOSY 7 (2张：Poster海报 + 现场照) -->
+                            <div class="w-full flex flex-wrap justify-center items-end gap-10 px-2 mt-4">
+                                <!-- 拍立得 1 (横向实拍) -->
+                                <div class="relative group/photo transform rotate-[-2deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/SOSY%207.jpg', '_blank')">
+                                    <div class="absolute -top-2 right-1/4 w-14 h-4 bg-orange-200/80 shadow-sm rotate-[-3deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/SOSY%207.jpg" alt="SOSY 7 Photo" class="w-60 h-48 object-cover group-hover/photo:scale-105 transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Conference Badge
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 拍立得 2 (海报款) -->
+                                <div class="relative group/photo transform rotate-[3deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer mt-4 md:mt-0" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/SOSY%207%20poster.jpg', '_blank')">
+                                    <div class="absolute -top-3 left-1/3 w-10 h-4 bg-blue-200/80 shadow-sm rotate-[4deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-[#fdfdfb] flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/SOSY%207%20poster.jpg" alt="SOSY 7 Poster" class="w-56 h-72 object-contain group-hover/photo:scale-[1.03] transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Conference Poster
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -349,12 +434,40 @@
                             <div class="text-center text-gray-800 text-lg mb-4 w-full">
                                 The 7th Annual Emory Undergraduate Linguistics Conference (EULC 7)
                             </div>
-                            <div class="w-full relative flex justify-center">
+                            <div class="w-full relative flex justify-center mb-10">
                                 <div class="w-11/12 md:w-3/4 relative flex items-center">
                                     <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d1d5db]"></div>
                                     <p class="w-full text-center py-2 px-6 text-gray-500 text-lg">
                                         A Sociolinguistic Analysis of Linguistic Hybridity and Identity in Nanjiang
                                     </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 艺术拼贴画廊：EULC 7 (2张：Flyer传单 + 现场照) -->
+                            <div class="w-full flex flex-wrap justify-center items-end gap-10 px-2 mt-4">
+                                <!-- 拍立得 1 (传单长款) -->
+                                <div class="relative group/photo transform rotate-[-3deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/eulc7_flyer.png', '_blank')">
+                                    <div class="absolute -top-3 left-1/4 w-12 h-4 bg-[#a47b73]/60 shadow-sm rotate-[3deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-[#fdfdfb] flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/eulc7_flyer.png" alt="EULC Flyer" class="w-56 h-72 object-contain group-hover/photo:scale-[1.03] transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Conference Poster
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 拍立得 2 (横向实拍) -->
+                                <div class="relative group/photo transform rotate-[2deg] hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-pointer mt-4 md:mt-0" onclick="window.open('https://raw.githubusercontent.com/wsenlin419-maker/picture/main/EULC.jpg', '_blank')">
+                                    <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-14 h-4 bg-green-200/80 shadow-sm rotate-[-2deg] z-10 mix-blend-multiply"></div>
+                                    <div class="bg-white p-3 pb-12 shadow-[0_8px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)] rounded-sm border border-gray-100">
+                                        <div class="overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <img src="https://raw.githubusercontent.com/wsenlin419-maker/picture/main/EULC.jpg" alt="EULC Photo" class="w-60 h-48 object-cover group-hover/photo:scale-105 transition-transform duration-700 ease-out">
+                                        </div>
+                                        <div class="absolute bottom-3 left-0 w-full text-center handwriting text-2xl text-gray-700">
+                                            Virtual Session
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -621,12 +734,10 @@
             }
         }
 
-        // 会议胸牌“解下”特效函数
         function tearOffBadge() {
             const badge = document.getElementById('visitor-badge');
             if (badge) {
                 badge.classList.add('unclipped');
-                // 动画结束后隐藏元素，防止遮挡下方内容点击
                 setTimeout(() => {
                     badge.style.display = 'none';
                 }, 700); 
